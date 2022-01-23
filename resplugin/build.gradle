@@ -1,0 +1,67 @@
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+
+
+    implementation 'com.android.tools.build:gradle:4.0.1'
+
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9'
+    implementation "pink.madis.apk.arsc:android-chunk-utils:0.0.7"
+
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+apply from: rootProject.file('gradle/maven_push.gradle')
+
+
+
+// Add compile dependencies to javadoc
+afterEvaluate {
+    javadoc.classpath
+}
+
+// This generates javadoc.jar
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+// This generates sources.jar
+task sourcesJar(type: Jar) {
+    from sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+// javadoc configuration
+javadoc {
+    options{
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version VERSION_NAME
+        links "http://docs.oracle.com/javase/7/docs/api"
+        title POM_ARTIFACT_ID
+    }
+}
