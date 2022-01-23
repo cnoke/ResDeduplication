@@ -85,7 +85,6 @@ fun ZipOutputStream.zip(srcRootDir: String, file: File) {
             subPath = subPath.substring(srcRootDir.length + File.separator.length)
         }
         subPath = subPath.replace("\\","/")
-        println("subPath :$subPath")
         val entry = ZipEntry(subPath)
         putNextEntry(entry)
 

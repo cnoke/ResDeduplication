@@ -176,7 +176,9 @@ class ResPlugin : Plugin<Project> {
 
     @Synchronized
     private fun FileWriter.synchronizedWriteString(string: String) {
-        write("$string${System.getProperty("line.separator")}")
+        val prt = "$string${System.getProperty("line.separator")}"
+        println(prt)
+        write(prt)
     }
 
     private fun restore(apFile: File, unZipDir: String): Long {

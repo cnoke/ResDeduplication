@@ -1,6 +1,13 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'resplugin'
+}
+
+ResDeduplication{
+    enable = true
+    enableWhenDebug = true
+    ignoreFileName = ["111","222"]
 }
 
 android {
