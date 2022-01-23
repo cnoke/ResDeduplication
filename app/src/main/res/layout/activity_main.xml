@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/test">
+    android:background="@mipmap/test">
 
     <TextView
         android:id="@+id/tv_contnet"
